@@ -21,33 +21,40 @@ public class BookService {
         this.mapper = mapper;
     }
     
+    // private
     private BookDTO mapBookToDTO(Book book) {
         return this.mapper.map(book, BookDTO.class);
     }
     
     // Create
+    protected Book addBookRepo(Book book) {
+    	return this.repo.save(book);
+    }
     public BookDTO addBook(Book book) {
-    	Book saved = this.repo.save(book);
-        return this.mapBookToDTO(saved);
+    	return this.mapBookToDTO(addBookRepo(book));
     }
 	
 	// Read
+    protected List<Book> getAllBooksRepo() {
+    	return this.repo.findAll();
+    }
     public List<BookDTO> getAllBooks() {
-    	return this.repo.findAll().stream()
-    			.map(this::mapBookToDTO).collect(Collectors.toList());
+    	return getAllBooksRepo().stream().map(this::mapBookToDTO).collect(Collectors.toList());
     }
 
 	// Update
-    public BookDTO updateBook(Long id, Book newBook) {
-        Optional<Book> existingOptional = this.repo.findById(id);
-        Book existing = existingOptional.get();
+    protected Book updateBookRepo(Long id, Book updatedBook) {
+    	 Optional<Book> existingOptional = this.repo.findById(id);
+         Book existing = existingOptional.get();
 
-        existing.setTitle(newBook.getTitle());
-        existing.setISBN(newBook.getISBN());
-        existing.setPublicationDate(newBook.getPublicationDate());
+         existing.setTitle(updatedBook.getTitle());
+         existing.setISBN(updatedBook.getISBN());
+         existing.setPublicationDate(updatedBook.getPublicationDate());
 
-        Book updated = this.repo.save(existing);
-        return this.mapBookToDTO(updated);
+         return this.repo.save(existing);
+    }
+    public BookDTO updateBook(Long id, Book updatedBook) {
+    	return this.mapBookToDTO(updateBookRepo(id, updatedBook));
     }
 
     // Delete
