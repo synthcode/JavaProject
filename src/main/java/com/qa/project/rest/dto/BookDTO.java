@@ -1,20 +1,30 @@
 package com.qa.project.rest.dto;
 
+import java.sql.Date;
+
 public class BookDTO {
-	private long id;
+	private Long bookId;
 	private String title;
-	private String author;
+	private Long ISBN;
+	private Date publicationDate;
 	
 	public BookDTO() {
 		// super();
 	}
-	 
-	// Getters and Setters
-	public long getId() {
-		return id;
+	
+	// Constructor (without id?)
+	public BookDTO(String title, Long ISBN, Date publicationDate) {
+		this.title = title;
+		this.ISBN = ISBN;
+		this.publicationDate = publicationDate;
 	}
-	public void setId(long id) {
-		this.id = id;
+	
+	// Getters and setters
+	public long getId() {
+		return bookId;
+	}
+	public void setId(Long bookId) {
+		this.bookId = bookId;
 	}
 	public String getTitle() {
 		return title;
@@ -22,10 +32,16 @@ public class BookDTO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getAuthor() {
-		return author;
+	public Long getISBN() {
+		return ISBN;
 	}
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setISBN(Long ISBN) {
+		this.ISBN = ISBN;
+	}
+	public Date getPublicationDate() {
+		return publicationDate;
+	}
+	public void setPublicationDate(Date publicationDate) {
+		this.publicationDate = publicationDate;
 	}
 }

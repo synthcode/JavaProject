@@ -38,19 +38,20 @@ public class BookService {
     }
 
 	// Update
-    public BookDTO updateBook(long id, Book newBook) {
+    public BookDTO updateBook(Long id, Book newBook) {
         Optional<Book> existingOptional = this.repo.findById(id);
         Book existing = existingOptional.get();
 
         existing.setTitle(newBook.getTitle());
-        existing.setAuthor(newBook.getAuthor());
+        existing.setISBN(newBook.getISBN());
+        existing.setPublicationDate(newBook.getPublicationDate());
 
         Book updated = this.repo.save(existing);
         return this.mapBookToDTO(updated);
     }
 
     // Delete
-    public boolean removeBook(long id) {
+    public boolean removeBook(Long id) {
         // removes the entity
         this.repo.deleteById(id);
         // checks to see if it still exists
