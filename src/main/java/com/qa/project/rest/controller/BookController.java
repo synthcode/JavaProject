@@ -24,32 +24,33 @@ public class BookController {
         this.service = service;
     }
 	
-	@GetMapping("/test")
+    // Test
+	@GetMapping("/book/test")
     public String test() {
-        return "Hello, World!";
+        return "Hello, World! from Book Controller";
     }
 	
 	// Create
-    @PostMapping("/create")
+    @PostMapping("/book/create")
     public BookDTO addBook(@RequestBody Book book) {
         return this.service.addBook(book);
     }
     
 	// Read
-    @GetMapping("/getAll")
+    @GetMapping("/book/getAll")
     public List<BookDTO> getAllBooks() {
         return this.service.getAllBooks();
     }
 
     // Update
-    @PutMapping("/update")
-    public BookDTO updateBook(@PathParam("id") long id, @RequestBody Book book) {
+    @PutMapping("/book/update")
+    public BookDTO updateBook(@PathParam("id") Long id, @RequestBody Book book) {
         return this.service.updateBook(id, book);
     }
     
     // Delete
-    @DeleteMapping("/delete/{id}")
-    public boolean removeBook(@PathVariable long id) {
+    @DeleteMapping("/book/delete/{id}")
+    public boolean removeBook(@PathVariable Long id) {
         return this.service.removeBook(id);
     }
 }

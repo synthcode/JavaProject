@@ -8,8 +8,9 @@ public class BookDTO {
 	private Long ISBN;
 	private Date publicationDate;
 	
+	// Default Constructor
 	public BookDTO() {
-		// super();
+		//
 	}
 	
 	// Constructor (without id?)
