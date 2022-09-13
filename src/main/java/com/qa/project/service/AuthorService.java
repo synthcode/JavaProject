@@ -26,30 +26,36 @@ public class AuthorService {
     }
     
     // Create
+    protected Author addAuthorRepo(Author author) {
+    	return this.repo.save(author);
+    }
     public AuthorDTO addAuthor(Author author) {
-    	Author saved = this.repo.save(author);
-        return this.mapAuthorToDTO(saved);
+    	return this.mapAuthorToDTO(addAuthorRepo(author));
     }
 	
 	// Read
+    protected List<Author> getAllAuthorsRepo() {
+    	return this.repo.findAll();
+    }
     public List<AuthorDTO> getAllAuthors() {
-    	return this.repo.findAll().stream()
-    			.map(this::mapAuthorToDTO).collect(Collectors.toList());
+    	return getAllAuthorsRepo().stream().map(this::mapAuthorToDTO).collect(Collectors.toList());
     }
 
 	// Update
-    public AuthorDTO updateAuthor(Long id, Author newAuthor) {
+    protected Author updateAuthorRepo(Long id, Author updatedAuthor) {
         Optional<Author> existingOptional = this.repo.findById(id);
         Author existing = existingOptional.get();
 
-        existing.setFirstName(newAuthor.getFirstName());
-        existing.setMiddleName(newAuthor.getMiddleName());
-        existing.setLastName(newAuthor.getLastName());
+        existing.setFirstName(updatedAuthor.getFirstName());
+        existing.setMiddleName(updatedAuthor.getMiddleName());
+        existing.setLastName(updatedAuthor.getLastName());
 
-        Author updated = this.repo.save(existing);
-        return this.mapAuthorToDTO(updated);
+        return this.repo.save(existing);
     }
-
+    public AuthorDTO updateAuthor(Long id, Author updatedAuthor) {
+    	return this.mapAuthorToDTO(updateAuthorRepo(id, updatedAuthor));
+    }
+    
     // Delete
     public boolean removeAuthor(Long id) {
         this.repo.deleteById(id);

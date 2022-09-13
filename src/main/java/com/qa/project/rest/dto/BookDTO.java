@@ -1,20 +1,21 @@
 package com.qa.project.rest.dto;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class BookDTO {
 	private Long bookId;
 	private String title;
 	private Long ISBN;
-	private Date publicationDate;
+	private LocalDate publicationDate;   // yyyy-MM-dd
 	
 	// Default Constructor
 	public BookDTO() {
 		//
 	}
-	
-	// Constructor (without id?)
-	public BookDTO(String title, Long ISBN, Date publicationDate) {
+
+	// Constructor (with id)
+	public BookDTO(Long bookId, String title, Long ISBN, LocalDate publicationDate) {
+		this.bookId = bookId;
 		this.title = title;
 		this.ISBN = ISBN;
 		this.publicationDate = publicationDate;
@@ -39,10 +40,10 @@ public class BookDTO {
 	public void setISBN(Long ISBN) {
 		this.ISBN = ISBN;
 	}
-	public Date getPublicationDate() {
+	public LocalDate getPublicationDate() {
 		return publicationDate;
 	}
-	public void setPublicationDate(Date publicationDate) {
+	public void setPublicationDate(LocalDate publicationDate) {
 		this.publicationDate = publicationDate;
 	}
 }

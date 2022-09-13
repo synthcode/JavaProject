@@ -10,9 +10,10 @@ public class AuthorDTO {
 	public AuthorDTO() {
 		//
 	}
-
-	// Constructor (without id?)
-	public AuthorDTO(String firstName, String middleName, String lastName) {
+	
+	// Constructor (with id)
+	public AuthorDTO(Long authorId, String firstName, String middleName, String lastName) {
+		this.authorId = authorId;
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
