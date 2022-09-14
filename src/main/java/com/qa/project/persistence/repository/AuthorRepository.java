@@ -10,5 +10,6 @@ import com.qa.project.persistence.domain.Author;
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 	
+	// Method body automatically created by the JPA 
 	public List<Author> findByLastName(String lastName);
 }

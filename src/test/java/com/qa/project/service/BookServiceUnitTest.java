@@ -25,6 +25,7 @@ public class BookServiceUnitTest {
 	private BookRepository repo;
 	
 	// @Before
+	final String KEY_WORD = "Title";
 	final String TITLE_1 = "Title 1";
 	final String TITLE_2 = "Title 2";
 	final Long ISBN_1 = 9780123456789L;
@@ -65,6 +66,22 @@ public class BookServiceUnitTest {
 		
 		// Verify that our repo was accessed exactly once
 		Mockito.verify(this.repo, Mockito.times(1)).findById(ID);
+	}
+	
+	@Test
+	void testGetBookByTitleKeyWordRepo() {
+		// GIVEN
+		final List<Book> BOOKS = List.of(new Book(1L, TITLE_1, ISBN_1, DATE_1),
+                                          new Book(2L, TITLE_2, ISBN_2, DATE_2));
+		
+		// WHEN
+		Mockito.when(this.repo.findByTitleContaining(KEY_WORD)).thenReturn(BOOKS);
+		
+		// THEN
+		assertThat(this.service.getBookByTitleKeyWordRepo(KEY_WORD)).isEqualTo(BOOKS);
+		
+		// Verify that our repo was accessed exactly once
+		Mockito.verify(this.repo, Mockito.times(1)).findByTitleContaining(KEY_WORD);
 	}
 
 	@Test

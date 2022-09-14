@@ -42,6 +42,12 @@ public class BookController {
     	return this.service.getBookById(id);
     }
     
+	// Read by title key word
+    @GetMapping("/book/getKeyWord")
+    public List<BookDTO> getBookByTitleKeyWord(@PathParam("keyWord") String keyWord) {
+    	return this.service.getBookByTitleKeyWord(keyWord);
+    }
+    
 	// Read All
     @GetMapping("/book/getAll")
     public List<BookDTO> getAllBooks() {

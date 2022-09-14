@@ -42,6 +42,14 @@ public class BookService {
     public BookDTO getBookById(Long id) {
     	return this.mapBookToDTO(getBookByIdRepo(id));
     }
+    
+	// Read by key word
+    protected List<Book> getBookByTitleKeyWordRepo(String keyWord) {
+    	return this.repo.findByTitleContaining(keyWord);
+    }
+    public List<BookDTO> getBookByTitleKeyWord(String keyWord) {
+    	return getBookByTitleKeyWordRepo(keyWord).stream().map(this::mapBookToDTO).collect(Collectors.toList());
+    }
 	
 	// Read all
     protected List<Book> getAllBooksRepo() {
