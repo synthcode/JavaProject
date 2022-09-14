@@ -42,16 +42,13 @@ public class AuthorService {
     	return this.mapAuthorToDTO(getAuthorByIdRepo(id));
     }
     
-    // Read by last name (TO DO)
-    /*
-    protected Author getAuthorByIdRepo(Long id) {
-   	 	Optional<Author> optionalBook = this.repo.findById(id);
-   	 	return optionalBook.get();
+    // Read by last name
+    protected List<Author> getAuthorByLastNameRepo(String lastName) {
+    	return this.repo.findByLastName(lastName);
     }
-    public AuthorDTO getAuthorById(Long id) {
-    	return this.mapAuthorToDTO(getAuthorByIdRepo(id));
+    public List<AuthorDTO> getAuthorByLastName(String lastName) {
+    	return getAuthorByLastNameRepo(lastName).stream().map(this::mapAuthorToDTO).collect(Collectors.toList());
     }
-    */
 	
 	// Read all
     protected List<Author> getAllAuthorsRepo() {

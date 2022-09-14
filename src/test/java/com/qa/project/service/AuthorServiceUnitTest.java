@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.qa.project.persistence.domain.Author;
-import com.qa.project.persistence.domain.Book;
 import com.qa.project.persistence.repository.AuthorRepository;
 
 @SpringBootTest
@@ -66,6 +65,21 @@ public class AuthorServiceUnitTest {
 		
 		// Verify that our repo was accessed exactly once
 		Mockito.verify(this.repo, Mockito.times(1)).findById(ID);
+	}
+	
+	@Test
+	void testGetAuthorByLastNameRepo() {
+		// GIVEN
+		final List<Author> AUTHORS = List.of(new Author(1L, BOOKID_1, FIRST_1, MIDDLE_1, LAST_1),
+				                              new Author(2L, BOOKID_2, FIRST_2, MIDDLE_2, LAST_2));
+		
+		// WHEN
+		Mockito.when(this.repo.findByLastName(LAST_2)).thenReturn(List.of(AUTHORS.get(1)));
+		// THEN
+		assertThat(this.service.getAuthorByLastNameRepo(LAST_2)).isEqualTo(List.of(AUTHORS.get(1)));
+		
+		// Verify that our repo was accessed exactly once
+		Mockito.verify(this.repo, Mockito.times(1)).findByLastName(LAST_2);
 	}
 	
 	@Test
