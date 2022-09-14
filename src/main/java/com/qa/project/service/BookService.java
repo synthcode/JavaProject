@@ -33,15 +33,24 @@ public class BookService {
     public BookDTO addBook(Book book) {
     	return this.mapBookToDTO(addBookRepo(book));
     }
+    
+	// Read by id
+    protected Book getBookByIdRepo(Long id) {
+   	 	Optional<Book> optionalBook = this.repo.findById(id);
+   	 	return optionalBook.get();
+    }
+    public BookDTO getBookById(Long id) {
+    	return this.mapBookToDTO(getBookByIdRepo(id));
+    }
 	
-	// Read
+	// Read all
     protected List<Book> getAllBooksRepo() {
     	return this.repo.findAll();
     }
     public List<BookDTO> getAllBooks() {
     	return getAllBooksRepo().stream().map(this::mapBookToDTO).collect(Collectors.toList());
     }
-
+   
 	// Update
     protected Book updateBookRepo(Long id, Book updatedBook) {
     	 Optional<Book> existingOptional = this.repo.findById(id);

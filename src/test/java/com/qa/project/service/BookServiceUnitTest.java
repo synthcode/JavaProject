@@ -49,6 +49,23 @@ public class BookServiceUnitTest {
 	    // Verify that our repo was accessed exactly once
 	    Mockito.verify(this.repo, Mockito.times(1)).save(BOOK);
 	}
+	
+	@Test
+	void testGetBookByIdRepo() {
+		// GIVEN
+		final Long ID = 1L;
+		final Book BOOK = new Book(ID, TITLE_1, ISBN_1, DATE_1);
+		final Optional<Book> OPTIONAL_BOOK = Optional.of(BOOK);
+		
+		// WHEN
+		Mockito.when(this.repo.findById(ID)).thenReturn(OPTIONAL_BOOK);
+		
+		// THEN
+		assertThat(this.service.getBookByIdRepo(ID)).isEqualTo(BOOK);
+		
+		// Verify that our repo was accessed exactly once
+		Mockito.verify(this.repo, Mockito.times(1)).findById(ID);
+	}
 
 	@Test
 	void testGetAllBooksRepo() {

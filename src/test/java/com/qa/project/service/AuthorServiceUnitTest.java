@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.qa.project.persistence.domain.Author;
+import com.qa.project.persistence.domain.Book;
 import com.qa.project.persistence.repository.AuthorRepository;
 
 @SpringBootTest
@@ -48,6 +49,23 @@ public class AuthorServiceUnitTest {
 
 	    // Verify that our repo was accessed exactly once
 	    Mockito.verify(this.repo, Mockito.times(1)).save(AUTHOR);
+	}
+	
+	@Test
+	void testGetAuthorByIdRepo() {
+		// GIVEN
+		final Long ID = 1L;
+		final Author AUTHOR = new Author(ID, BOOKID_1, FIRST_1, MIDDLE_1, LAST_1);
+		final Optional<Author> OPTIONAL_AUTHOR = Optional.of(AUTHOR);
+		
+		// WHEN
+		Mockito.when(this.repo.findById(ID)).thenReturn(OPTIONAL_AUTHOR);
+		
+		// THEN
+		assertThat(this.service.getAuthorByIdRepo(ID)).isEqualTo(AUTHOR);
+		
+		// Verify that our repo was accessed exactly once
+		Mockito.verify(this.repo, Mockito.times(1)).findById(ID);
 	}
 	
 	@Test
