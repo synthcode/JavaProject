@@ -32,8 +32,28 @@ public class AuthorService {
     public AuthorDTO addAuthor(Author author) {
     	return this.mapAuthorToDTO(addAuthorRepo(author));
     }
+    
+    // Read by id
+    protected Author getAuthorByIdRepo(Long id) {
+   	 	Optional<Author> optionalBook = this.repo.findById(id);
+   	 	return optionalBook.get();
+    }
+    public AuthorDTO getAuthorById(Long id) {
+    	return this.mapAuthorToDTO(getAuthorByIdRepo(id));
+    }
+    
+    // Read by last name (TO DO)
+    /*
+    protected Author getAuthorByIdRepo(Long id) {
+   	 	Optional<Author> optionalBook = this.repo.findById(id);
+   	 	return optionalBook.get();
+    }
+    public AuthorDTO getAuthorById(Long id) {
+    	return this.mapAuthorToDTO(getAuthorByIdRepo(id));
+    }
+    */
 	
-	// Read
+	// Read all
     protected List<Author> getAllAuthorsRepo() {
     	return this.repo.findAll();
     }

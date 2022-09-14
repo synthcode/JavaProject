@@ -36,12 +36,18 @@ public class BookController {
         return this.service.addBook(book);
     }
     
-	// Read
+	// Read by id
+    @GetMapping("/book/get")
+    public BookDTO getBookById(@PathParam("id") Long id) {
+    	return this.service.getBookById(id);
+    }
+    
+	// Read All
     @GetMapping("/book/getAll")
     public List<BookDTO> getAllBooks() {
         return this.service.getAllBooks();
     }
-
+    
     // Update
     @PutMapping("/book/update")
     public BookDTO updateBook(@PathParam("id") Long id, @RequestBody Book book) {

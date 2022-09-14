@@ -36,12 +36,18 @@ public class AuthorController {
         return this.service.addAuthor(author);
     }
     
-	// Read
+	// Read by id
+    @GetMapping("/author/get")
+    public AuthorDTO getAuthorById(@PathParam("id") Long id) {
+    	return this.service.getAuthorById(id);
+    }
+    
+	// Read All
     @GetMapping("/author/getAll")
     public List<AuthorDTO> getAllAuthors() {
         return this.service.getAllAuthors();
     }
-
+    
     // Update
     @PutMapping("/author/update")
     public AuthorDTO updateAuthor(@PathParam("id") Long id, @RequestBody Author author) {

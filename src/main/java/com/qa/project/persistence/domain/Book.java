@@ -7,8 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "book")
+// @SecondaryTable(name = "Author", pkJoinColumns = @PrimaryKeyJoinColumn(name = "books_id"))
 public class Book {
 	// Fields
 	@Id
