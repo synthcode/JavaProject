@@ -23,6 +23,8 @@ public class AuthorServiceUnitTest {
 	private AuthorRepository repo;
 	
 	// @Before
+	final Long BOOKID_1 = null;
+	final Long BOOKID_2 = null;
 	final String FIRST_1 = "Joe";
 	final String FIRST_2 = "John";
 	final String MIDDLE_1 = null;
@@ -35,8 +37,8 @@ public class AuthorServiceUnitTest {
 	@Test
 	void testAddAuthorRepo() {
 		// GIVEN
-	    final Author AUTHOR = new Author(null, FIRST_1, MIDDLE_1, LAST_1);
-	    final Author SAVED_AUTHOR = new Author(1L, FIRST_1, MIDDLE_1, LAST_1);
+	    final Author AUTHOR = new Author(null, BOOKID_1, FIRST_1, MIDDLE_1, LAST_1);
+	    final Author SAVED_AUTHOR = new Author(1L, BOOKID_1, FIRST_1, MIDDLE_1, LAST_1);
 	    
 		// WHEN
 	    Mockito.when(this.repo.save(AUTHOR)).thenReturn(SAVED_AUTHOR);
@@ -51,8 +53,8 @@ public class AuthorServiceUnitTest {
 	@Test
 	void testGetAllAuthorsRepo() {
 		// GIVEN
-		final List<Author> AUTHORS = List.of(new Author(1L, FIRST_1, MIDDLE_1, LAST_1),
-				                              new Author(2L, FIRST_2, MIDDLE_2, LAST_2));
+		final List<Author> AUTHORS = List.of(new Author(1L, BOOKID_1, FIRST_1, MIDDLE_1, LAST_1),
+				                              new Author(2L, BOOKID_2, FIRST_2, MIDDLE_2, LAST_2));
 
 		// WHEN
 		Mockito.when(this.repo.findAll()).thenReturn(AUTHORS);
@@ -67,36 +69,36 @@ public class AuthorServiceUnitTest {
 	@Test
 	void testUpdateAuthorRepo() {
 		// GIVEN
-		final Long AUTHOR_ID = 1L;
-		final Author AUTHOR = new Author(AUTHOR_ID, FIRST_1, MIDDLE_1, LAST_1);
+		final Long ID = 1L;
+		final Author AUTHOR = new Author(ID, BOOKID_1, FIRST_1, MIDDLE_1, LAST_1);
 		final Optional<Author> OPTIONAL_AUTHOR = Optional.of(AUTHOR);
-		final Author UPDATED_AUTHOR = new Author(AUTHOR_ID, FIRST_2, MIDDLE_2, LAST_2);
+		final Author UPDATED_AUTHOR = new Author(ID, BOOKID_2, FIRST_2, MIDDLE_2, LAST_2);
 		
 		// WHEN
-		Mockito.when(this.repo.findById(AUTHOR_ID)).thenReturn(OPTIONAL_AUTHOR);
+		Mockito.when(this.repo.findById(ID)).thenReturn(OPTIONAL_AUTHOR);
 		Mockito.when(this.repo.save(UPDATED_AUTHOR)).thenReturn(UPDATED_AUTHOR);
 		
 		// THEN
-		assertThat(this.service.updateAuthorRepo(AUTHOR_ID, UPDATED_AUTHOR)).isEqualTo(UPDATED_AUTHOR);
+		assertThat(this.service.updateAuthorRepo(ID, UPDATED_AUTHOR)).isEqualTo(UPDATED_AUTHOR);
 		
 		// Verify that our repo was accessed twice
-		Mockito.verify(this.repo, Mockito.times(1)).findById(AUTHOR_ID);
+		Mockito.verify(this.repo, Mockito.times(1)).findById(ID);
 		Mockito.verify(this.repo, Mockito.times(1)).save(UPDATED_AUTHOR);
 	}
 	
 	@Test
 	void testRemoveAuthor() {
 		// GIVEN
-		final Long AUTHOR_ID = 1L;
+		final Long ID = 1L;
 		
 		// WHEN
-		// Don't need to mock this.repo.deleteById(AUTHOR_ID), which returns void
-		Mockito.when(this.repo.existsById(AUTHOR_ID)).thenReturn(false);
+		// Don't need to mock this.repo.deleteById(ID), which returns void
+		Mockito.when(this.repo.existsById(ID)).thenReturn(false);
 		
 		// THEN
-		assertThat(this.service.removeAuthor(AUTHOR_ID)).isEqualTo(true);
+		assertThat(this.service.removeAuthor(ID)).isEqualTo(true);
 		
 		// Verify that our repo was accessed exactly once
-		Mockito.verify(this.repo, Mockito.times(1)).existsById(AUTHOR_ID);
+		Mockito.verify(this.repo, Mockito.times(1)).existsById(ID);
 	}
 }

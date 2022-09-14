@@ -1,7 +1,8 @@
 package com.qa.project.rest.dto;
 
 public class AuthorDTO {
-	private Long authorId;
+	private Long id;
+	private Long bookId;
 	private String firstName;
 	private String middleName;
 	private String lastName;
@@ -12,18 +13,25 @@ public class AuthorDTO {
 	}
 	
 	// Constructor (with id)
-	public AuthorDTO(Long authorId, String firstName, String middleName, String lastName) {
-		this.authorId = authorId;
+	public AuthorDTO(Long id, Long bookId, String firstName, String middleName, String lastName) {
+		this.id = id;
+		this.bookId = bookId;
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
 	}
 	
-	public Long getAuthorId() {
-		return authorId;
+	public Long getId() {
+		return id;
 	}
-	public void setAuthorId(Long authorId) {
-		this.authorId = authorId;
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Long getBookId() {
+		return bookId;
+	}
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
 	}
 	public String getFirstName() {
 		return firstName;

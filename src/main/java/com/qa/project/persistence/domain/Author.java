@@ -11,7 +11,9 @@ public class Author {
 	// Fields
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long authorId;
+	private Long id;
+	@Column
+	private Long bookId;
 	@Column(nullable = false)
 	private String firstName;
 	@Column
@@ -25,18 +27,25 @@ public class Author {
 	}
 	
 	// Constructor (with id)
-	public Author(Long authorId, String firstName, String middleName, String lastName) {
-		this.authorId = authorId;
+	public Author(Long id, Long bookId, String firstName, String middleName, String lastName) {
+		this.id = id;
+		this.bookId = bookId;
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
 	}
 	
-	public Long getAuthorId() {
-		return authorId;
+	public Long getId() {
+		return id;
 	}
-	public void setAuthorId(Long authorId) {
-		this.authorId = authorId;
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Long getBookId() {
+		return bookId;
+	}
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -67,7 +76,13 @@ public class Author {
 			return true;
 		} else {
 			Author author = (Author) obj;
-			boolean authorIdEqual = this.authorId.equals(author.authorId);   // NOT NULL
+			boolean idEqual = this.id.equals(author.id);   // NOT NULL
+			
+			boolean bookIdEqual;
+			if (this.bookId == null && author.bookId == null) bookIdEqual = true;
+			else if (this.bookId == null || author.bookId == null) bookIdEqual = false;
+			else bookIdEqual = this.bookId.equals(author.bookId);
+			
 			boolean firstNameEqual = this.firstName.equals(author.firstName);   // NOT NULL
 			
 			boolean middleNameEqual;
@@ -76,7 +91,7 @@ public class Author {
 			else middleNameEqual = this.middleName.equals(author.middleName);
 			
 			boolean lastNameEqual = this.lastName.equals(author.lastName);   // NOT NULL
-			return authorIdEqual && firstNameEqual && middleNameEqual && lastNameEqual;
+			return idEqual && bookIdEqual && firstNameEqual && middleNameEqual && lastNameEqual;
 		}
 	}
 	

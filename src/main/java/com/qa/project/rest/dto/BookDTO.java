@@ -3,7 +3,7 @@ package com.qa.project.rest.dto;
 import java.time.LocalDate;
 
 public class BookDTO {
-	private Long bookId;
+	private Long id;
 	private String title;
 	private Long ISBN;
 	private LocalDate publicationDate;   // yyyy-MM-dd
@@ -14,19 +14,19 @@ public class BookDTO {
 	}
 
 	// Constructor (with id)
-	public BookDTO(Long bookId, String title, Long ISBN, LocalDate publicationDate) {
-		this.bookId = bookId;
+	public BookDTO(Long id, String title, Long ISBN, LocalDate publicationDate) {
+		this.id = id;
 		this.title = title;
 		this.ISBN = ISBN;
 		this.publicationDate = publicationDate;
 	}
 	
 	// Getters and setters
-	public long getId() {
-		return bookId;
+	public Long getId() {
+		return id;
 	}
-	public void setId(Long bookId) {
-		this.bookId = bookId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getTitle() {
 		return title;

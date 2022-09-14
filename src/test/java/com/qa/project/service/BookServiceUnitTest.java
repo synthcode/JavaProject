@@ -69,36 +69,36 @@ public class BookServiceUnitTest {
 	@Test
 	void testUpdateBookRepo() {
 		// GIVEN
-		final Long BOOK_ID = 1L;
-		final Book BOOK = new Book(BOOK_ID, TITLE_1, ISBN_1, DATE_1);
+		final Long ID = 1L;
+		final Book BOOK = new Book(ID, TITLE_1, ISBN_1, DATE_1);
 		final Optional<Book> OPTIONAL_BOOK = Optional.of(BOOK);
-		final Book UPDATED_BOOK = new Book(BOOK_ID, TITLE_2, ISBN_2, DATE_2);
+		final Book UPDATED_BOOK = new Book(ID, TITLE_2, ISBN_2, DATE_2);
 		
 		// WHEN
-		Mockito.when(this.repo.findById(BOOK_ID)).thenReturn(OPTIONAL_BOOK);
+		Mockito.when(this.repo.findById(ID)).thenReturn(OPTIONAL_BOOK);
 		Mockito.when(this.repo.save(UPDATED_BOOK)).thenReturn(UPDATED_BOOK);
 		
 		// THEN
-		assertThat(this.service.updateBookRepo(BOOK_ID, UPDATED_BOOK)).isEqualTo(UPDATED_BOOK);
+		assertThat(this.service.updateBookRepo(ID, UPDATED_BOOK)).isEqualTo(UPDATED_BOOK);
 		
 		// Verify that our repo was accessed twice
-		Mockito.verify(this.repo, Mockito.times(1)).findById(BOOK_ID);
+		Mockito.verify(this.repo, Mockito.times(1)).findById(ID);
 		Mockito.verify(this.repo, Mockito.times(1)).save(UPDATED_BOOK);
 	}
 	
 	@Test
 	void testRemoveBook() {
 		// GIVEN
-		final Long BOOK_ID = 1L;
+		final Long ID = 1L;
 		
 		// WHEN
-		// Don't need to mock this.repo.deleteById(BOOK_ID), which returns void
-		Mockito.when(this.repo.existsById(BOOK_ID)).thenReturn(false);
+		// Don't need to mock this.repo.deleteById(ID), which returns void
+		Mockito.when(this.repo.existsById(ID)).thenReturn(false);
 		
 		// THEN
-		assertThat(this.service.removeBook(BOOK_ID)).isEqualTo(true);
+		assertThat(this.service.removeBook(ID)).isEqualTo(true);
 		
 		// Verify that our repo was accessed exactly once
-		Mockito.verify(this.repo, Mockito.times(1)).existsById(BOOK_ID);
+		Mockito.verify(this.repo, Mockito.times(1)).existsById(ID);
 	}
 }
