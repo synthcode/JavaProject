@@ -5,23 +5,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "author")
 public class Author {
-	// Fields
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column
-	private Long bookId;
 	@Column(nullable = false)
 	private String firstName;
 	@Column
 	private String middleName;
 	@Column(nullable = false)
 	private String lastName;
+	
+	@ManyToOne
+	private Book book;
 
 	// Default Constructor
 	public Author() {
@@ -29,9 +30,8 @@ public class Author {
 	}
 	
 	// Constructor (with id)
-	public Author(Long id, Long bookId, String firstName, String middleName, String lastName) {
+	public Author(Long id, String firstName, String middleName, String lastName) {
 		this.id = id;
-		this.bookId = bookId;
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -42,12 +42,6 @@ public class Author {
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public Long getBookId() {
-		return bookId;
-	}
-	public void setBookId(Long bookId) {
-		this.bookId = bookId;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -80,11 +74,6 @@ public class Author {
 			Author author = (Author) obj;
 			boolean idEqual = this.id.equals(author.id);   // NOT NULL
 			
-			boolean bookIdEqual;
-			if (this.bookId == null && author.bookId == null) bookIdEqual = true;
-			else if (this.bookId == null || author.bookId == null) bookIdEqual = false;
-			else bookIdEqual = this.bookId.equals(author.bookId);
-			
 			boolean firstNameEqual = this.firstName.equals(author.firstName);   // NOT NULL
 			
 			boolean middleNameEqual;
@@ -93,7 +82,7 @@ public class Author {
 			else middleNameEqual = this.middleName.equals(author.middleName);
 			
 			boolean lastNameEqual = this.lastName.equals(author.lastName);   // NOT NULL
-			return idEqual && bookIdEqual && firstNameEqual && middleNameEqual && lastNameEqual;
+			return idEqual && firstNameEqual && middleNameEqual && lastNameEqual;
 		}
 	}
 	

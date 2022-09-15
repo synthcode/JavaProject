@@ -1,21 +1,19 @@
 package com.qa.project.persistence.domain;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.SecondaryTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "book")
-// @SecondaryTable(name = "Author", pkJoinColumns = @PrimaryKeyJoinColumn(name = "books_id"))
 public class Book {
-	// Fields
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -25,6 +23,9 @@ public class Book {
 	private Long ISBN;
 	@Column
 	private LocalDate publicationDate;   // yyyy-MM-dd
+	
+	@OneToMany(mappedBy = "book")
+	private List<Author> authors;
 	
 	// Default Constructor
 	public Book() {
@@ -64,7 +65,7 @@ public class Book {
 	public void setPublicationDate(LocalDate publicationDate) {
 		this.publicationDate = publicationDate;
 	}
-	
+		
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {

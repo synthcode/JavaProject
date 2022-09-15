@@ -48,7 +48,7 @@ public class BookController {
     	return this.service.getBookByTitleKeyWord(keyWord);
     }
     
-	// Read All
+	// Read all
     @GetMapping("/book/getAll")
     public List<BookDTO> getAllBooks() {
         return this.service.getAllBooks();

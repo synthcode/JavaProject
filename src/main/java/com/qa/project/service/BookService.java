@@ -21,8 +21,8 @@ public class BookService {
         this.mapper = mapper;
     }
     
-    // private
-    private BookDTO mapBookToDTO(Book book) {
+    // protected
+    protected BookDTO mapBookToDTO(Book book) {
         return this.mapper.map(book, BookDTO.class);
     }
     
@@ -43,7 +43,7 @@ public class BookService {
     	return this.mapBookToDTO(getBookByIdRepo(id));
     }
     
-	// Read by key word
+	// Read by title key word
     protected List<Book> getBookByTitleKeyWordRepo(String keyWord) {
     	return this.repo.findByTitleContaining(keyWord);
     }

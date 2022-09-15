@@ -48,7 +48,13 @@ public class AuthorController {
     	return this.service.getAuthorByLastName(lastName);
     }
     
-	// Read All
+    // Read authors of book
+    @GetMapping("/author/getBook")
+    public List<AuthorDTO> getAuthorsOfBook(@PathParam("bookId") Long bookId) {
+    	return this.service.getAuthorsOfBook(bookId);
+    }
+    
+	// Read all
     @GetMapping("/author/getAll")
     public List<AuthorDTO> getAllAuthors() {
         return this.service.getAllAuthors();
