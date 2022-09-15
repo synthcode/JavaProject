@@ -22,7 +22,7 @@ public class AuthorServiceUnitTest {
 	@MockBean
 	private AuthorRepository repo;
 	
-	// @Before
+	// Setup
 	final String FIRST_1 = "Joe";
 	final String FIRST_2 = "John";
 	final String MIDDLE_1 = null;
@@ -78,6 +78,23 @@ public class AuthorServiceUnitTest {
 		
 		// Verify that our repo was accessed exactly once
 		Mockito.verify(this.repo, Mockito.times(1)).findByLastName(LAST_2);
+	}
+	
+	@Test
+	void testGetAuthorsOfBookRepo() {
+		// GIVEN
+		final List<Author> AUTHORS_OF_BOOK
+		  = List.of(new Author(1L, FIRST_1, MIDDLE_1, LAST_1),
+				     new Author(2L, FIRST_2, MIDDLE_2, LAST_2));
+		
+		// WHEN
+		Mockito.when(this.repo.customFindAuthorsOfBook(1L)).thenReturn(AUTHORS_OF_BOOK);
+		
+		// THEN
+		assertThat(this.service.getAuthorsOfBookRepo(1L)).isEqualTo(AUTHORS_OF_BOOK);
+		
+		// Verify that our repo was accessed exactly once
+		Mockito.verify(this.repo, Mockito.times(1)).customFindAuthorsOfBook(1L);
 	}
 	
 	@Test

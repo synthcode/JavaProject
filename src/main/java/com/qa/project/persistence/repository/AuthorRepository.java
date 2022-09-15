@@ -15,5 +15,5 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
 	public List<Author> findByLastName(String lastName);
 	
 	@Query(value = "SELECT * FROM author WHERE book_id = ?", nativeQuery = true)
-	public List<Author> customFindAuthorsOfBook(Long BookId);
+	public List<Author> customFindAuthorsOfBook(Long bookId);
 }

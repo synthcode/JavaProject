@@ -21,8 +21,8 @@ public class BookService {
         this.mapper = mapper;
     }
     
-    // protected
-    protected BookDTO mapBookToDTO(Book book) {
+    // private
+    private BookDTO mapBookToDTO(Book book) {
         return this.mapper.map(book, BookDTO.class);
     }
     
@@ -49,6 +49,14 @@ public class BookService {
     }
     public List<BookDTO> getBookByTitleKeyWord(String keyWord) {
     	return getBookByTitleKeyWordRepo(keyWord).stream().map(this::mapBookToDTO).collect(Collectors.toList());
+    }
+    
+    // Read books of publisher
+    protected List<Book> getBooksOfPublisherRepo(Long publisherId) {
+    	return this.repo.customFindBooksOfPublisher(publisherId);
+    }
+    public List<BookDTO> getBooksOfPublisher(Long publisherId) {
+    	return getBooksOfPublisherRepo(publisherId).stream().map(this::mapBookToDTO).collect(Collectors.toList());
     }
 	
 	// Read all

@@ -21,8 +21,8 @@ public class AuthorService {
         this.mapper = mapper;
     }
     
-    // protected
-    public AuthorDTO mapAuthorToDTO(Author author) {
+    // private
+    private AuthorDTO mapAuthorToDTO(Author author) {
         return this.mapper.map(author, AuthorDTO.class);
     }
     
@@ -52,11 +52,11 @@ public class AuthorService {
     }
     
     // Read authors of book
-    protected List<Author> getAuthorsOfBookRepo(Long BookId) {
-    	return this.repo.customFindAuthorsOfBook(BookId);
+    protected List<Author> getAuthorsOfBookRepo(Long bookId) {
+    	return this.repo.customFindAuthorsOfBook(bookId);
     }
-    public List<AuthorDTO> getAuthorsOfBook(Long BookId) {
-    	return getAuthorsOfBookRepo(BookId).stream().map(this::mapAuthorToDTO).collect(Collectors.toList());
+    public List<AuthorDTO> getAuthorsOfBook(Long bookId) {
+    	return getAuthorsOfBookRepo(bookId).stream().map(this::mapAuthorToDTO).collect(Collectors.toList());
     }
 	
 	// Read all
