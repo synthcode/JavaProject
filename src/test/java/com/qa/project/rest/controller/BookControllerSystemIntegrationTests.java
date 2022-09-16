@@ -84,44 +84,44 @@ public class BookControllerSystemIntegrationTests {
 //				true, "O'Reilly", "UM");
 	}
 
-	@Test
-	public void testGetBooks() throws Exception {
-		// mock http request builder
-		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET, "/book/getAll");
-		// specifying accept header return type
-		mockRequest.accept(MediaType.APPLICATION_JSON);
-		// JSON string for obj mapper
-		String booksJson = mapper.writeValueAsString(BOOKS);
-		// String booksJson = mapper.writeValueAsString(booksInDatabase);
-		// result matcher
-		ResultMatcher statusMatcher = MockMvcResultMatchers.status().isOk();
-		ResultMatcher contentMatcher = MockMvcResultMatchers.content().json(booksJson);
-		// request and assert
-		mockMvc.perform(mockRequest).andExpect(statusMatcher).andExpect(contentMatcher);
-	}
-	
-	@Test
-	public void createBookTest() throws Exception {
-		// test object
-		final Book BOOK = BOOK_3;
-		final Book EXPECTED_BOOK = new Book(3L, TITLE_3, ISBN_3, DATE_3);;
-		
-		// mock request
-		MockHttpServletRequestBuilder mockRequest
-		  = MockMvcRequestBuilders.request(HttpMethod.POST, "/book/create");
-		
-		// specifying accept header return type
-		mockRequest.contentType(MediaType.APPLICATION_JSON);
-		mockRequest.content(mapper.writeValueAsString(BOOK));
-		mockRequest.accept(MediaType.APPLICATION_JSON);
-		
-		// ResultMatcher checkStatus = MockMvcResultMatchers.status().isCreated();
-		ResultMatcher checkStatus = MockMvcResultMatchers.status().isOk();
-		ResultMatcher checkContent
-		  = MockMvcResultMatchers.content().json(mapper.writeValueAsString(EXPECTED_BOOK));
-		
-		mockMvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkContent);
-	}
+//	@Test
+//	public void testGetBooks() throws Exception {
+//		// mock http request builder
+//		MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.request(HttpMethod.GET, "/book/getAll");
+//		// specifying accept header return type
+//		mockRequest.accept(MediaType.APPLICATION_JSON);
+//		// JSON string for obj mapper
+//		String booksJson = mapper.writeValueAsString(BOOKS);
+//		// String booksJson = mapper.writeValueAsString(booksInDatabase);
+//		// result matcher
+//		ResultMatcher statusMatcher = MockMvcResultMatchers.status().isOk();
+//		ResultMatcher contentMatcher = MockMvcResultMatchers.content().json(booksJson);
+//		// request and assert
+//		mockMvc.perform(mockRequest).andExpect(statusMatcher).andExpect(contentMatcher);
+//	}
+//	
+//	@Test
+//	public void createBookTest() throws Exception {
+//		// test object
+//		final Book BOOK = BOOK_3;
+//		final Book EXPECTED_BOOK = new Book(3L, TITLE_3, ISBN_3, DATE_3);;
+//		
+//		// mock request
+//		MockHttpServletRequestBuilder mockRequest
+//		  = MockMvcRequestBuilders.request(HttpMethod.POST, "/book/create");
+//		
+//		// specifying accept header return type
+//		mockRequest.contentType(MediaType.APPLICATION_JSON);
+//		mockRequest.content(mapper.writeValueAsString(BOOK));
+//		mockRequest.accept(MediaType.APPLICATION_JSON);
+//		
+//		// ResultMatcher checkStatus = MockMvcResultMatchers.status().isCreated();
+//		ResultMatcher checkStatus = MockMvcResultMatchers.status().isOk();
+//		ResultMatcher checkContent
+//		  = MockMvcResultMatchers.content().json(mapper.writeValueAsString(EXPECTED_BOOK));
+//		
+//		mockMvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkContent);
+//	}
     
 	/*
     @Test
