@@ -14,6 +14,11 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
 	// Method findByLastName created by the JPA 
 	public List<Author> findByLastName(String lastName);
 	
-	@Query(value = "SELECT * FROM author WHERE book_id = ?", nativeQuery = true)
+	// @Query(value = "SELECT * FROM author WHERE book_id = ?", nativeQuery = true)
+	// public List<Author> customFindAuthorsOfBook(Long bookId);
+	
+	@Query(value = "SELECT * FROM author_book INNER JOIN author"
+				     + " ON author_book.author_id = author.id"
+			           + " WHERE author_book.book_id = ?", nativeQuery = true)
 	public List<Author> customFindAuthorsOfBook(Long bookId);
 }
