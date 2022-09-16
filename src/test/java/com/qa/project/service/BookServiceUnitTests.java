@@ -18,7 +18,7 @@ import com.qa.project.persistence.domain.Book;
 import com.qa.project.persistence.repository.BookRepository;
 
 @SpringBootTest
-public class BookServiceUnitTest {
+public class BookServiceUnitTests {
 	@Autowired
 	private BookService service;
 	@MockBean

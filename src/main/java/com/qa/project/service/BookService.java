@@ -60,7 +60,7 @@ public class BookService {
     }
 	
 	// Read all
-    protected List<Book> getAllBooksRepo() {
+    public List<Book> getAllBooksRepo() {
     	return this.repo.findAll();
     }
     public List<BookDTO> getAllBooks() {

@@ -5,5 +5,6 @@ CREATE TABLE booktest.book (
   	title VARCHAR(100) NOT NULL,
   	ISBN BIGINT(13) UNIQUE,
   	publication_date DATE,
+  	publisher_id BIGINT(20),
 	PRIMARY KEY (id)
 );

@@ -16,7 +16,7 @@ import com.qa.project.persistence.domain.Author;
 import com.qa.project.persistence.repository.AuthorRepository;
 
 @SpringBootTest
-public class AuthorServiceUnitTest {
+public class AuthorServiceUnitTests {
 	@Autowired
 	private AuthorService service;
 	@MockBean

@@ -16,7 +16,7 @@ import com.qa.project.persistence.domain.Publisher;
 import com.qa.project.persistence.repository.PublisherRepository;
 
 @SpringBootTest
-public class PublisherServiceUnitTest {
+public class PublisherServiceUnitTests {
 	@Autowired
 	private PublisherService service;
 	@MockBean

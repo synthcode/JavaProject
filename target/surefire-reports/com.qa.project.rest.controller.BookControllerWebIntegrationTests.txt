@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.qa.project.rest.controller.BookControllerWebIntegrationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.445 s <<< FAILURE! - in com.qa.project.rest.controller.BookControllerWebIntegrationTests
+getBooksTest  Time elapsed: 0.025 s  <<< ERROR!
+java.lang.ClassCastException: class java.util.LinkedList cannot be cast to class org.springframework.http.ResponseEntity (java.util.LinkedList is in module java.base of loader 'bootstrap'; org.springframework.http.ResponseEntity is in unnamed module of loader 'app')
+	at com.qa.project.rest.controller.BookControllerWebIntegrationTests.getBooksTest(BookControllerWebIntegrationTests.java:62)
+
