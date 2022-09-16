@@ -100,6 +100,23 @@ public class BookServiceUnitTests {
 		// Verify that our repo was accessed exactly once
 		Mockito.verify(this.repo, Mockito.times(1)).customFindBooksOfPublisher(1L);
 	}
+	
+	@Test
+	void testGetBooksOfAuthorRepo() {
+		// GIVEN
+		final List<Book> BOOKS_OF_AUTHOR
+		  = List.of(new Book(1L, TITLE_1, ISBN_1, DATE_1),
+				     new Book(2L, TITLE_2, ISBN_2, DATE_2));
+		
+		// WHEN
+		Mockito.when(this.repo.customFindBooksOfAuthor(1L)).thenReturn(BOOKS_OF_AUTHOR);
+		
+		// THEN
+		assertThat(this.service.getBooksOfAuthorRepo(1L)).isEqualTo(BOOKS_OF_AUTHOR);
+		
+		// Verify that our repo was accessed exactly once
+		Mockito.verify(this.repo, Mockito.times(1)).customFindBooksOfAuthor(1L);
+	}
 
 	@Test
 	void testGetAllBooksRepo() {

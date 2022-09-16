@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.qa.project.service.AuthorServiceUnitTests" time="1.005" tests="7" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.qa.project.service.StockServiceUnitTests" time="0.741" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -58,11 +58,8 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testGetAuthorsOfBookRepo" classname="com.qa.project.service.AuthorServiceUnitTests" time="0.07"/>
-  <testcase name="testRemoveAuthor" classname="com.qa.project.service.AuthorServiceUnitTests" time="0.005"/>
-  <testcase name="testAddAuthorRepo" classname="com.qa.project.service.AuthorServiceUnitTests" time="0.004"/>
-  <testcase name="testUpdateAuthorRepo" classname="com.qa.project.service.AuthorServiceUnitTests" time="0.005"/>
-  <testcase name="testGetAuthorByLastNameRepo" classname="com.qa.project.service.AuthorServiceUnitTests" time="0.003"/>
-  <testcase name="testGetAuthorByIdRepo" classname="com.qa.project.service.AuthorServiceUnitTests" time="0.003"/>
-  <testcase name="testGetAllAuthorsRepo" classname="com.qa.project.service.AuthorServiceUnitTests" time="0.004"/>
+  <testcase name="testAddStockRepo" classname="com.qa.project.service.StockServiceUnitTests" time="0.004"/>
+  <testcase name="testUpdateStockRepo" classname="com.qa.project.service.StockServiceUnitTests" time="0.004"/>
+  <testcase name="testGetAllStocksRepo" classname="com.qa.project.service.StockServiceUnitTests" time="0.004"/>
+  <testcase name="testRemoveStock" classname="com.qa.project.service.StockServiceUnitTests" time="0.003"/>
 </testsuite>

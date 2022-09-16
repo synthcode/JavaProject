@@ -60,9 +60,17 @@ public class BookService {
     public List<BookDTO> getBooksOfPublisher(Long publisherId) {
     	return getBooksOfPublisherRepo(publisherId).stream().map(this::mapBookToDTO).collect(Collectors.toList());
     }
+    
+    // Read books of author
+    protected List<Book> getBooksOfAuthorRepo(Long authorId) {
+    	return this.repo.customFindBooksOfAuthor(authorId);
+    }
+    public List<BookDTO> getBooksOfAuthor(Long authorId) {
+    	return getBooksOfAuthorRepo(authorId).stream().map(this::mapBookToDTO).collect(Collectors.toList());
+    }
 	
 	// Read all
-    public List<Book> getAllBooksRepo() {
+    protected List<Book> getAllBooksRepo() {
     	return this.repo.findAll();
     }
     public List<BookDTO> getAllBooks() {
