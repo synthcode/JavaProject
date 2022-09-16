@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import com.qa.project.exception.BookNotFoundException;
 import com.qa.project.persistence.domain.Book;
 import com.qa.project.persistence.repository.BookRepository;
 import com.qa.project.rest.dto.BookDTO;
@@ -36,8 +37,9 @@ public class BookService {
     
 	// Read by id
     protected Book getBookByIdRepo(Long id) {
-   	 	Optional<Book> optionalBook = this.repo.findById(id);
-   	 	return optionalBook.get();
+   	 	// Optional<Book> optionalBook = this.repo.findById(id);
+   	 	// return optionalBook.get();
+   	    return this.repo.findById(id).orElseThrow(BookNotFoundException::new);
     }
     public BookDTO getBookById(Long id) {
     	return this.mapBookToDTO(getBookByIdRepo(id));

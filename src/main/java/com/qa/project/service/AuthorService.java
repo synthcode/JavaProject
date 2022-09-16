@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import com.qa.project.exception.AuthorNotFoundException;
 import com.qa.project.persistence.domain.Author;
 import com.qa.project.persistence.repository.AuthorRepository;
 import com.qa.project.rest.dto.AuthorDTO;
@@ -36,8 +37,9 @@ public class AuthorService {
     
     // Read by id
     protected Author getAuthorByIdRepo(Long id) {
-   	 	Optional<Author> optionalBook = this.repo.findById(id);
-   	 	return optionalBook.get();
+   	 	// Optional<Author> optionalBook = this.repo.findById(id);
+   	 	// return optionalBook.get();
+   	    return this.repo.findById(id).orElseThrow(AuthorNotFoundException::new);
     }
     public AuthorDTO getAuthorById(Long id) {
     	return this.mapAuthorToDTO(getAuthorByIdRepo(id));

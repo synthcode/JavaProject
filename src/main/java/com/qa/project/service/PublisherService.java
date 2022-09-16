@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import com.qa.project.exception.PublisherNotFoundException;
 import com.qa.project.persistence.domain.Publisher;
 import com.qa.project.persistence.repository.PublisherRepository;
 import com.qa.project.rest.dto.PublisherDTO;
@@ -36,8 +37,9 @@ public class PublisherService {
     
 	// Read by id
     protected Publisher getPublisherByIdRepo(Long id) {
-   	 	Optional<Publisher> optionalPublisher = this.repo.findById(id);
-   	 	return optionalPublisher.get();
+   	 	// Optional<Publisher> optionalPublisher = this.repo.findById(id);
+   	 	// return optionalPublisher.get();
+   	 	return this.repo.findById(id).orElseThrow(PublisherNotFoundException::new);
     }
     public PublisherDTO getPublisherById(Long id) {
     	return this.mapPublisherToDTO(getPublisherByIdRepo(id));

@@ -36,8 +36,8 @@ To do. (coverage report might be missing)
 [GitHub](https://github.com/synthcode/JavaProject/)
 
 ### .jar file
-The file (project).jar is the packaged build of the application, and can be run from the command line.
+The file Project-0.0.1-SNAPSHOT.jar in the /target folder is the packaged build of the application, and can be run from the command line with the command "java -jar Project-0.0.1-SNAPSHOT.jar"
 
 ### Feature branch
-The GitHub repository has two branches, "main" and "feature". Commits were pushed regularly to the feature branch which was subsequently merged into the main branch.
+The GitHub repository has several branches, "main", "feature", "feature2", ..."". Commits were pushed regularly to feature branches which were frequently merged into the main branch.
 
