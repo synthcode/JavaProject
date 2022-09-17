@@ -2,6 +2,7 @@ package com.qa.project.persistence.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class Publisher {
 	@Column(nullable = false)
 	private String name;
 	
-	@OneToMany(mappedBy = "publisher")
+	@OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL)
 	private List<Book> books;
 	
 	// Default Constructor

@@ -2,21 +2,27 @@ package com.qa.project.persistence.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "stock")
 public class Stock {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+	// @Column(name = "id")
+	@Column(name = "book_id")
 	private Long id;
 	@Column
 	private Integer quantity;
 
-	// @OneToOne
+	@OneToOne
+	@MapsId
+	@JoinColumn(name = "book_id")
+	private Book book;
 
 	// Default Constructor
 	public Stock() {

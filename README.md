@@ -22,6 +22,8 @@ A password could be added when creating/updating/deleting objects to prevent unw
 ## Screenshots showing postman requests and the output from the API
 To do
 
+![ScreenShot](/screenshots/Test_Book.png)
+
 ## Screenshots of database to prove that data is being persisted
 To do
 

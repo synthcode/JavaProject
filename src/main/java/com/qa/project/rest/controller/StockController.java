@@ -44,7 +44,7 @@ public class StockController {
     
     // Update
     @PutMapping("/stock/update")
-    public StockDTO updateStock(@PathParam("id") Long id, @RequestBody Stock stock) {
+    public StockDTO updateStock(@PathParam("bookId") Long id, @RequestBody Stock stock) {
         return this.service.updateStock(id, stock);
     }
     
