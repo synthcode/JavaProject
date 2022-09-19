@@ -76,7 +76,7 @@ Now to link the books to the authors:
 
 ![ScreenShot](/screenshots/Postman_update_book_author.png)
 
-The response should probably verify a successful here, however we can check MySQL Workbench again:
+The response should probably verify success here, however we can check MySQL Workbench again:
 
 ![ScreenShot](/screenshots/Workbench_all_author_book.png)
 
