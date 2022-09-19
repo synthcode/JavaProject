@@ -57,6 +57,9 @@ public class PublisherService {
     protected Publisher updatePublisherRepo(Long id, Publisher updatedPublisher) {
     	 Optional<Publisher> existingOptional = this.repo.findById(id);
          Publisher existing = existingOptional.get();
+         
+//         // do this first, otherwise error
+//         existing.setBooks(updatedPublisher.getBooks());
 
          existing.setName(updatedPublisher.getName());
 

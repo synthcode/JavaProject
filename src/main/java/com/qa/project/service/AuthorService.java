@@ -74,6 +74,7 @@ public class AuthorService {
         Optional<Author> existingOptional = this.repo.findById(id);
         Author existing = existingOptional.get();
 
+        // Not setting any books here
         existing.setFirstName(updatedAuthor.getFirstName());
         existing.setMiddleName(updatedAuthor.getMiddleName());
         existing.setLastName(updatedAuthor.getLastName());
@@ -82,6 +83,16 @@ public class AuthorService {
     }
     public AuthorDTO updateAuthor(Long id, Author updatedAuthor) {
     	return this.mapAuthorToDTO(updateAuthorRepo(id, updatedAuthor));
+    }
+    
+	// Add Book
+    public void addBookToAuthor(Long id, Long bookId) {
+    	this.repo.customAddBookToAuthor(id, bookId);
+    }
+    
+    // Delete author
+    public void deleteBookFromAuthor(Long id, Long bookId) {
+    	this.repo.customDeleteBookFromAuthor(id, bookId);
     }
     
     // Delete

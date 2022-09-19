@@ -1,6 +1,7 @@
 package com.qa.project.persistence.domain;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,8 +16,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "book")
+@JsonIgnoreProperties(value = "authors")
 public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,17 +33,18 @@ public class Book {
 	@Column
 	private LocalDate publicationDate;   // yyyy-MM-dd
 	
-	// @OneToMany(mappedBy = "book")
-	// private List<Author> authors;
-	
-	@ManyToMany(mappedBy = "books")
-	private Set<Author> authors;
+	// @ManyToMany(mappedBy = "books", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "books",
+			      cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+	                           CascadeType.REFRESH, CascadeType.DETACH})
+	private Set<Author> authors = new HashSet<>();
 	
 	@ManyToOne
 	private Publisher publisher;
 	
     @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
+    @JsonManagedReference
     private Stock stock;
 	
 	// Default Constructor
@@ -46,14 +52,14 @@ public class Book {
 		//
 	}
 	
-	// Constructor (with id)
+	// Constructor (with id, without authors, publisher, stock)
 	public Book(Long id, String title, Long ISBN, LocalDate publicationDate) {
 		this.id = id;
 		this.title = title;
 		this.ISBN = ISBN;
 		this.publicationDate = publicationDate;
 	}
-	
+		
 	// Getters and setters
 	public Long getId() {
 		return id;
@@ -78,6 +84,28 @@ public class Book {
 	}
 	public void setPublicationDate(LocalDate publicationDate) {
 		this.publicationDate = publicationDate;
+	}
+	
+	// Getters and setters (for other tables)
+	public Set<Author> getAuthors() {
+		return authors;
+	}
+	public void setAuthors(Set<Author> authors) {
+		this.authors = authors;
+	}
+	public Publisher getPublisher() {
+		return publisher;
+	}
+	public void setPublisher(Publisher publisher) {
+		this.publisher = publisher;
+	}
+	public Stock getStock() {
+		return stock;
+	}
+	public void setStock(Stock stock) {
+		this.stock = stock;
+		// To avoid error "attempted to assign id from null one-to-one property":
+		this.stock.setBook(this);
 	}
 		
 	@Override
@@ -107,5 +135,12 @@ public class Book {
 		}
 	}
 	
-	// (Override public int hashCode())
+//	@Override
+//	public int hashCode() {
+//		return this.getId().hashCode();
+//  }
+	@Override	
+    public int hashCode() {
+		return this.getISBN().hashCode();
+    }
 }

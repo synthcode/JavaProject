@@ -66,6 +66,20 @@ public class AuthorController {
         return this.service.updateAuthor(id, author);
     }
     
+    // Add book
+    @PutMapping("/author/addBook")
+    public void addBookToAuthor(@PathParam("id") Long id,
+    		                      @PathParam("bookId") Long bookId) {
+    	this.service.addBookToAuthor(id, bookId);
+    }
+    
+    // Delete book
+    @DeleteMapping("/author/deleteBook")
+    public void deleteBookFromAuthor(@PathParam("id") Long id,
+                                       @PathParam("bookId") Long bookId) {
+    	this.service.deleteBookFromAuthor(id, bookId);
+    }
+    
     // Delete
     @DeleteMapping("/author/delete/{id}")
     public boolean removeAuthor(@PathVariable Long id) {

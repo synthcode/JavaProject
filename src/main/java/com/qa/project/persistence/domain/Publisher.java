@@ -1,5 +1,6 @@
 package com.qa.project.persistence.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,8 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "publisher")
+@JsonIgnoreProperties(value = "books")
 public class Publisher {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,14 +25,14 @@ public class Publisher {
 	private String name;
 	
 	@OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL)
-	private List<Book> books;
+	private List<Book> books = new ArrayList<>();
 	
 	// Default Constructor
 	public Publisher() {
 		//
 	}
 	
-	// Constructor (with id)
+	// Constructor (with id, without books)
 	public Publisher(Long id, String name) {
 		this.id = id;
 		this.name = name;
@@ -45,6 +49,14 @@ public class Publisher {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	// Getters and setters (for other tables)
+	public List<Book> getBooks() {
+		return books;
+	}
+	public void setBooks(List<Book> books) {
+		this.books = books;
 	}
 	
 	@Override
@@ -68,5 +80,8 @@ public class Publisher {
 		}
 	}
 	
-	// (Override public int hashCode())
+	@Override
+    public int hashCode() {
+		return this.getName().hashCode();
+    }
 }

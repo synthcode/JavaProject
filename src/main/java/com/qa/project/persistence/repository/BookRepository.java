@@ -2,7 +2,10 @@ package com.qa.project.persistence.repository;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -21,4 +24,16 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 		     + " ON author_book.book_id = book.id"
 	           + " WHERE author_book.author_id = ?", nativeQuery = true)
 	public List<Book> customFindBooksOfAuthor(Long authorId);
+	
+	@Modifying
+	@Query(value = "INSERT INTO author_book (author_id, book_id) VALUES (:authorId, :id)",
+	         nativeQuery = true)
+	@Transactional
+	void customAddAuthorToBook(Long id, Long authorId);
+	
+	@Modifying
+	@Query(value = "DELETE FROM author_book WHERE author_id = :authorId AND book_id = :id",
+	         nativeQuery = true)
+	@Transactional
+	void customDeleteAuthorFromBook(Long id, Long authorId);
 }

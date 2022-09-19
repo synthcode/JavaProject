@@ -1,7 +1,9 @@
 package com.qa.project.persistence.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,33 +14,35 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "author")
+@JsonIgnoreProperties(value = "books")
 public class Author {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(nullable = false)
+	@Column
 	private String firstName;
 	@Column
 	private String middleName;
 	@Column(nullable = false)
 	private String lastName;
 	
-	// @ManyToOne
-	// private Book book;
-	
-	@ManyToMany
+	// @ManyToMany
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+                             CascadeType.REFRESH, CascadeType.DETACH})
 	@JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "author_id"), 
-			    inverseJoinColumns = @JoinColumn(name = "book_id"))
-	private Set<Book> books;
+			     inverseJoinColumns = @JoinColumn(name = "book_id"))
+	private Set<Book> books = new HashSet<>();
 
 	// Default Constructor
 	public Author() {
 		//
 	}
 	
-	// Constructor (with id)
+	// Constructor (with id, without books)
 	public Author(Long id, String firstName, String middleName, String lastName) {
 		this.id = id;
 		this.firstName = firstName;
@@ -71,6 +75,14 @@ public class Author {
 		this.lastName = lastName;
 	}
 	
+	// Getters and setters (for other tables)
+	public Set<Book> getBooks() {
+		return books;
+	}
+	public void setBooks(Set<Book> books) {
+		this.books = books;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
@@ -95,5 +107,12 @@ public class Author {
 		}
 	}
 	
-	// (Override public int hashCode())
+//  @Override
+//	public int hashCode() {
+//		return this.getId().hashCode();
+//	}
+	@Override
+    public int hashCode() {
+		return (this.getFirstName() + this.getMiddleName() + this.getLastName()).hashCode();
+    }
 }

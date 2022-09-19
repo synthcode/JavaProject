@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.websocket.server.PathParam;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.qa.project.exception.BookNotFoundException;
+import com.qa.project.persistence.domain.Author;
 import com.qa.project.persistence.domain.Book;
 import com.qa.project.persistence.repository.BookRepository;
 import com.qa.project.rest.dto.BookDTO;
@@ -85,11 +88,25 @@ public class BookService {
          existing.setTitle(updatedBook.getTitle());
          existing.setISBN(updatedBook.getISBN());
          existing.setPublicationDate(updatedBook.getPublicationDate());
+         
+         // Not setting any authors here
+         existing.setPublisher(updatedBook.getPublisher());
+         existing.setStock(updatedBook.getStock());
 
          return this.repo.save(existing);
     }
     public BookDTO updateBook(Long id, Book updatedBook) {
     	return this.mapBookToDTO(updateBookRepo(id, updatedBook));
+    }
+    
+	// Add Author
+    public void addAuthorToBook(Long id, Long authorId) {
+    	this.repo.customAddAuthorToBook(id, authorId);
+    }
+    
+    // Delete author
+    public void deleteAuthorFromBook(Long id, Long authorId) {
+    	this.repo.customDeleteAuthorFromBook(id, authorId);
     }
 
     // Delete

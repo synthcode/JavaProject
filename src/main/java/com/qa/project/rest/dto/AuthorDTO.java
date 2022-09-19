@@ -1,21 +1,27 @@
 package com.qa.project.rest.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.qa.project.persistence.domain.Book;
+
 public class AuthorDTO {
 	private Long id;
-	private Long bookId;
 	private String firstName;
 	private String middleName;
 	private String lastName;
+	
+	// other tables
+	private Set<Book> books = new HashSet<>();
 
 	// Default Constructor
 	public AuthorDTO() {
 		//
 	}
 	
-	// Constructor (with id)
-	public AuthorDTO(Long id, Long bookId, String firstName, String middleName, String lastName) {
+	// Constructor (with id, without books)
+	public AuthorDTO(Long id, String firstName, String middleName, String lastName) {
 		this.id = id;
-		this.bookId = bookId;
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -26,12 +32,6 @@ public class AuthorDTO {
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public Long getBookId() {
-		return bookId;
-	}
-	public void setBookId(Long bookId) {
-		this.bookId = bookId;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -50,5 +50,13 @@ public class AuthorDTO {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	// Getters and setters (for other tables)
+	public Set<Book> getBooks() {
+		return books;
+	}
+	public void setBooks(Set<Book> books) {
+		this.books = books;
 	}
 }

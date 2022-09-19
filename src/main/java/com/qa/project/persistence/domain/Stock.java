@@ -8,12 +8,12 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "stock")
 public class Stock {
 	@Id
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
-	// @Column(name = "id")
 	@Column(name = "book_id")
 	private Long id;
 	@Column
@@ -22,6 +22,7 @@ public class Stock {
 	@OneToOne
 	@MapsId
 	@JoinColumn(name = "book_id")
+	@JsonBackReference
 	private Book book;
 
 	// Default Constructor
@@ -29,7 +30,7 @@ public class Stock {
 		//
 	}
 	
-	// Constructor (with id)
+	// Constructor (with id, without book)
 	public Stock(Long id, Integer quantity) {
 		this.id = id;
 		this.quantity = quantity;
@@ -47,6 +48,14 @@ public class Stock {
 	}
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+	
+	// Getters and setters (for other tables)
+	public Book getBook() {
+		return book;
+	}
+	public void setBook(Book book) {
+		this.book = book;
 	}
 		
 	@Override
@@ -70,5 +79,8 @@ public class Stock {
 		}
 	}
 	
-	// (Override public int hashCode())
+	@Override
+	public int hashCode() {
+		return this.getId().hashCode();
+	}
 }

@@ -47,6 +47,9 @@ public class StockService {
     protected Stock updateStockRepo(Long id, Stock updatedStock) {
     	 Optional<Stock> existingOptional = this.repo.findById(id);
          Stock existing = existingOptional.get();
+         
+         // do this first, otherwise error
+         existing.setBook(updatedStock.getBook());
 
          existing.setQuantity(updatedStock.getQuantity());
 
