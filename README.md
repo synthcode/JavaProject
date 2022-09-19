@@ -62,9 +62,7 @@ Our Stock table should have been populated too, let's check:
 
 ![ScreenShot](/screenshots/Workbench_all_stocks.png)
 
-Creating a Stock record or deleting a Stock record fails due to the one-to-one relationship with the Book table. If we want to delete a Stock record we must delete the Book record. However we can update a Stock record:
-
-![ScreenShot](/screenshots/Postman_update_stock.png)
+Creating a Stock record or deleting a Stock record fails due to the one-to-one relationship with the Book table. If we want to delete a Stock record we must delete the Book record. However we can update a Stock record.
 
 Now let's add a record to our Author table:
 
@@ -78,7 +76,7 @@ Now to link the books to the authors:
 
 ![ScreenShot](/screenshots/Postman_update_book_author.png)
 
-The response should probably indicate a successful link here, however we can check MySQL Workbench again:
+The response should probably verify a successful here, however we can check MySQL Workbench again:
 
 ![ScreenShot](/screenshots/Workbench_all_author_book.png)
 
@@ -90,10 +88,10 @@ To search a book by author id:
 
 ![ScreenShot](/screenshots/Postman_read_books_author.png)
 
-And so on.
+And so on (further screenshots can be viewed in the screenshots directory).
 
 ## Possible improvements for future revisions of the project
-A password could be required when creating/updating or deleting objects to prevent unwanted alterations to the database -- most database queries are read queries in any case. The DTO used in the project currently holds the same information as the original object, so this could be changed. Features that weren't used in the project such as Lombok could be used. The code should be tested more, preferably achieving 80% or higher test coverage. More tables could be created to better simulate a small book shop. A front end could be developed instead of using Postman to make using the database easier to search and see the results in a nicer form than JSON.
+A password could be required when creating/updating or deleting objects to prevent unwanted alterations to the database -- most database queries are read queries in any case. The DTO used in the project currently holds the same information as the original object, so this could be changed. Features that weren't used in the project such as Lombok could be used. The code should be tested more, particularly the integration testing and preferably having 80% or higher test coverage. More tables could be created to better simulate a small book shop. A front end could be developed instead of using Postman to make using the database easier to search and see the results in a nicer form than JSON.
 
 ## Risk Assessment
 Since this database is stored on a local machine, it is vulnerable to data loss or corruption, so backups should be made. It'd probably be safer to store the database securely in the cloud. This would allow reliable access for other employees over the internet. If the database can only be accessed online, then backup internet connections should be on standby to ensure access to the database at all times. There are no permissions set up in the database, therefore creating, updating and deleting of records is allowed when most often only read permissions are required.
